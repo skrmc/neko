@@ -45,7 +45,7 @@ export function elementRequestFullscreen(el: HTMLElement) {
   return true
 }
 
-export function isFullscreen(): boolean {
+export function fullscreenElement(): HTMLElement | null {
   return (
     document.fullscreenElement ||
     //@ts-ignore
@@ -54,7 +54,11 @@ export function isFullscreen(): boolean {
     document.mozFullScreenElement ||
     //@ts-ignore
     document.webkitFullscreenElement
-  )
+  ) as HTMLElement | null
+}
+
+export function isFullscreen(): boolean {
+  return fullscreenElement() !== null
 }
 
 export function onFullscreenChange(el: HTMLElement, fn: () => void) {
